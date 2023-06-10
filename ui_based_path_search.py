@@ -12,6 +12,7 @@ class AlgoEnum(enum.Enum):
 
     DFS = "dfs"
     BFS = "bfs"
+    ASTAR = "astar"
 
 
 class PathFinding:
@@ -25,11 +26,13 @@ class PathFinding:
         cell_size=25,
         obstacle_color="brown",
         search=[],
+        window_number = 0
     ):
         self.grid = grid
         self.algo = algo
         self.canvas = tk.Tk()
         self.canvas.title(f"{len(grid)}x{len(grid[0])} grid with {algo} algorithm")
+        self.window_number = window_number
         self.cells = {}
         self.bg_color = bg_color
         self.cell_size = cell_size
@@ -41,6 +44,18 @@ class PathFinding:
             self.search = (len(grid) - 1, len(grid[0] - 1))
         if algo not in [data.value for data in AlgoEnum]:
             raise ValueError(f"{algo} algorithm is not implemented here.")
+
+    def set_window_position(self):
+        """Setting the GUI window position over screen."""
+        padding = 50
+        width = len(self.grid[0]) * self.cell_size + padding
+        height = len(self.grid) * self.cell_size + padding
+
+        row = self.window_number // 3
+        col = self.window_number % 3
+
+        print(self.window_number, height, width, row, col)
+        self.canvas.geometry(f"+{width*col+padding}+{height*row+padding}")
 
     def generate_frames(self):
         """Generate cells to use in a grid of UI."""
@@ -80,6 +95,7 @@ class PathFinding:
 
     def start_visualizing(self):
         """Creating thread for traverse the algo and starting the main screen of gui."""
+        self.set_window_position()
         self.generate_frames()
         self.color_obstacles()
         self.initialize_destination()
