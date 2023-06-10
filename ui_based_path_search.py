@@ -4,7 +4,7 @@ import enum
 import threading
 import tkinter as tk
 
-import path_finding_alogs
+import path_finding_algos
 
 
 class AlgoEnum(enum.Enum):
