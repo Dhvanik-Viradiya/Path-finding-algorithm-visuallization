@@ -30,7 +30,12 @@ search = (random.randint(0, ROWS - 1), random.randint(0, COLS - 1))
 grid[search[0]][search[1]] = 0
 
 
-threading.Thread(target=run_dfs).start()
-threading.Thread(target=run_bfs).start()
+t1 = threading.Thread(target=run_dfs)
+t2 = threading.Thread(target=run_bfs)
 
+t1.start()
+t2.start()
+
+t1.join()
+t2.join()
 

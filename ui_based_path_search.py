@@ -84,7 +84,7 @@ class PathFinding:
         self.color_obstacles()
         self.initialize_destination()
         t = threading.Thread(
-            target=eval(f"path_finding_alogs.{self.algo}"),
+            target=eval(f"path_finding_algos.{self.algo}"),
             args=(
                 self.grid,
                 0,
