@@ -1,7 +1,7 @@
 import random
 import threading
 
-import ui_based_path_search
+import visualize_algos
 
 ROWS = 15
 COLS = 13
@@ -21,18 +21,18 @@ def create_grid():
 
 def run_dfs(window_number):
     """Run dfs algorithm in GUI."""
-    dfs_algo = ui_based_path_search.PathFinding(grid=grid, algo="dfs", search=search, window_number=window_number)
+    dfs_algo = visualize_algos.PathFinding(grid=grid, algo="dfs", search=search, window_number=window_number)
     dfs_algo.start_visualizing()
 
 
 def run_bfs(window_number):
     """Run bfs algorithm in GUI."""
-    bfs_algo = ui_based_path_search.PathFinding(grid=grid, algo="bfs", search=search, window_number=window_number)
+    bfs_algo = visualize_algos.PathFinding(grid=grid, algo="bfs", search=search, window_number=window_number)
     bfs_algo.start_visualizing()
 
 def run_astar(window_number):
     """Run astar algorithm in GUI."""
-    astar_algo = ui_based_path_search.PathFinding(grid=grid, algo="astar", search=search, window_number=window_number)
+    astar_algo = visualize_algos.PathFinding(grid=grid, algo="astar", search=search, window_number=window_number)
     astar_algo.start_visualizing()
 
 

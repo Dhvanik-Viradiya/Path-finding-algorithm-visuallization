@@ -4,7 +4,7 @@ import enum
 import threading
 import tkinter as tk
 
-import path_finding_algos
+from visualize_algos import path_finding_algos
 
 
 class AlgoEnum(enum.Enum):
@@ -26,7 +26,7 @@ class PathFinding:
         cell_size=25,
         obstacle_color="brown",
         search=[],
-        window_number = 0
+        window_number=0,
     ):
         self.grid = grid
         self.algo = algo
@@ -45,7 +45,7 @@ class PathFinding:
         if algo not in [data.value for data in AlgoEnum]:
             raise ValueError(f"{algo} algorithm is not implemented here.")
 
-    def set_window_position(self):
+    def _set_window_position(self):
         """Setting the GUI window position over screen."""
         padding = 50
         width = len(self.grid[0]) * self.cell_size + padding
@@ -57,7 +57,7 @@ class PathFinding:
         print(self.window_number, height, width, row, col)
         self.canvas.geometry(f"+{width*col+padding}+{height*row+padding}")
 
-    def generate_frames(self):
+    def _generate_frames(self):
         """Generate cells to use in a grid of UI."""
         rows = len(self.grid)
         cols = len(self.grid[0])
@@ -78,27 +78,27 @@ class PathFinding:
                 cell.grid(row=row, column=column)
                 self.cells[(row, column)] = cell
 
-    def color_cell(self, i, j, color="blue"):
+    def _color_cell(self, i, j, color="blue"):
         """Coloring the cell with given color."""
         self.cells[(i, j)].configure(background=color)
 
-    def initialize_destination(self):
+    def _initialize_destination(self):
         """Coloring the destination."""
-        self.color_cell(self.search[0], self.search[1], "red")
+        self._color_cell(self.search[0], self.search[1], "red")
 
-    def color_obstacles(self):
+    def _color_obstacles(self):
         """Coloring the obstacles with given color."""
         for i, _ in enumerate(self.grid):
             for j in range(len(self.grid[0])):
                 if self.grid[i][j]:
-                    self.color_cell(i, j, self.obstacle_color)
+                    self._color_cell(i, j, self.obstacle_color)
 
     def start_visualizing(self):
         """Creating thread for traverse the algo and starting the main screen of gui."""
-        self.set_window_position()
-        self.generate_frames()
-        self.color_obstacles()
-        self.initialize_destination()
+        self._set_window_position()
+        self._generate_frames()
+        self._color_obstacles()
+        self._initialize_destination()
         t = threading.Thread(
             target=eval(f"path_finding_algos.{self.algo}"),
             args=(

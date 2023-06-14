@@ -1,16 +1,6 @@
-import copy
 import math
 import time
 from queue import Queue
-
-# maze = [
-#     [0, 0, 0],
-#     [0, 0, 0],
-#     [0, 1, 1],
-#     [0, 1, 0],
-#     [0, 0, 0],
-# ]
-
 
 #              Down,  right,  up,      left
 DIRECTIONS = [(1, 0), (0, 1), (-1, 0), (0, -1)]
@@ -68,7 +58,6 @@ def bfs(maze, row, col, visited, search, cells=None, bg_color=None):
         cells[(row, col)].configure(background="orange")
         previous = (row, col)
     while not que.empty():
-        # print(que)
         time.sleep(0.1)
         a, b = que.get()
 
@@ -146,10 +135,7 @@ def astar(maze, row, col, visited, search, cells=None, bg_color=None):
 
         # Pop current off open list, add to closed list
         open_list.pop(current_ind)
-        # print(current_node.f)
-        # print(current_node.g)
-        # print(current_node.h)
-        # print("*"*50)
+
         for i, j in DIRECTIONS:
             r = current_node.position[0] + i
             c = current_node.position[1] + j
@@ -195,10 +181,3 @@ def astar(maze, row, col, visited, search, cells=None, bg_color=None):
                 cells[(r, c)].configure(background="orange")
                 previous = (r, c)
         closed_list.append(current_node)
-
-
-# visited = [[None for j in range(len(maze[0]))] for i in range(len(maze))]
-# print(visited)
-# # visited[0][0] = True
-# data = dfs(maze, 0, 0, copy.deepcopy(visited))
-# print(data)

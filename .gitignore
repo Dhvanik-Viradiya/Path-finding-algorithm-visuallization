@@ -1,2 +1,5 @@
 __pycache__
 generate_grid.py
+build
+dist
+*.egg-info
